@@ -26,7 +26,6 @@ import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 import net.neoforged.neoforge.client.network.event.RegisterClientPayloadHandlersEvent;
-import org.lwjgl.glfw.GLFW;
 
 /** Client side: keys, the ki HUD and the copy of the character the server sends us. */
 @EventBusSubscriber(modid = ZCraft.MOD_ID, value = Dist.CLIENT)
@@ -37,17 +36,17 @@ public final class ZClient {
     public static PlayerData data = new PlayerData();
 
     public static final KeyMapping.Category CATEGORY = new KeyMapping.Category(ZCraft.id("main"));
-    public static final KeyMapping MENU = key("menu", GLFW.GLFW_KEY_V);
-    public static final KeyMapping CHARGE = key("charge", GLFW.GLFW_KEY_C);
-    public static final KeyMapping BLAST = key("blast", GLFW.GLFW_KEY_R);
-    public static final KeyMapping TRANSFORM = key("transform", GLFW.GLFW_KEY_G);
-    public static final KeyMapping DESCEND = key("descend", GLFW.GLFW_KEY_H);
+    public static final KeyMapping MENU = key("menu", InputConstants.KEY_V);
+    public static final KeyMapping CHARGE = key("charge", InputConstants.KEY_C);
+    public static final KeyMapping BLAST = key("blast", InputConstants.KEY_R);
+    public static final KeyMapping TRANSFORM = key("transform", InputConstants.KEY_G);
+    public static final KeyMapping DESCEND = key("descend", InputConstants.KEY_H);
 
     private static boolean wasCharging;
     private static boolean wasBlasting;
 
     private static KeyMapping key(String name, int code) {
-        return new KeyMapping("key.zcraft." + name, InputConstants.Type.KEYSYM, code, CATEGORY);
+        return new KeyMapping("key.zcraft." + name, code, CATEGORY);
     }
 
     /** The one place that opens screens (this call is what differs between Minecraft versions). */
