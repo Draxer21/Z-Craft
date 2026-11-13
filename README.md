@@ -6,6 +6,7 @@ transformaciones al estilo Dragon Ball.
 | Rama | Minecraft | NeoForge |
 |---|---|---|
 | `main` | 26.2 | 26.2.0.93 o superior |
+| `mc-26.1` | 26.1.2 | 26.1.2.122 o superior |
 
 Los jars de cada versión se publican solos en la sección **Releases** cuando la compilación pasa.
 
