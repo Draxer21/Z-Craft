@@ -7,6 +7,7 @@ transformaciones al estilo Dragon Ball.
 |---|---|---|
 | `main` | 26.2 | 26.2.0.93 o superior |
 | `mc-26.1` | 26.1.2 | 26.1.2.122 o superior |
+| `mc-26.3` | 26.3 | 26.3.0.102 o superior |
 
 Los jars de cada versión se publican solos en la sección **Releases** cuando la compilación pasa.
 
