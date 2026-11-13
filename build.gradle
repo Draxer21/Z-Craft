@@ -1,0 +1,57 @@
+plugins {
+    id 'java-library'
+    id 'net.neoforged.gradle.userdev' version '7.1.39'
+}
+
+version = "${mod_version}+mc${minecraft_version}"
+group = mod_group_id
+base { archivesName = mod_id }
+java.toolchain.languageVersion = JavaLanguageVersion.of(25)
+
+runs {
+    configureEach {
+        systemProperty 'forge.logging.console.level', 'debug'
+        workingDirectory project.layout.projectDirectory.dir('run').dir(name)
+        modSource project.sourceSets.main
+    }
+    client {}
+    server {
+        argument '--nogui'
+    }
+}
+
+dependencies {
+    implementation "net.neoforged:neoforge:${neo_version}"
+}
+
+tasks.withType(ProcessResources).configureEach {
+    def props = [minecraft_version: minecraft_version, minecraft_version_range: minecraft_version_range,
+                 neo_version: neo_version, mod_id: mod_id, mod_name: mod_name,
+                 mod_license: mod_license, mod_version: mod_version]
+    inputs.properties props
+    filesMatching('META-INF/neoforge.mods.toml') { expand props }
+}
+
+tasks.withType(JavaCompile).configureEach { options.encoding = 'UTF-8' }
+
+// Every language file must have the same keys as en_us.json.
+def languageFiles = fileTree('src/main/resources/assets/zcraft/lang') { include '*.json' }
+
+tasks.register('checkLanguageKeys') {
+    group = 'verification'
+    inputs.files(languageFiles)
+    doLast {
+        def parser = new groovy.json.JsonSlurper()
+        def reference = new TreeSet((parser.parse(file('src/main/resources/assets/zcraft/lang/en_us.json')) as Map).keySet())
+        languageFiles.files.findAll { it.name != 'en_us.json' }.each { languageFile ->
+            def keys = (parser.parse(languageFile) as Map).keySet()
+            def missing = reference - keys
+            def extra = keys - reference
+            if (!missing.isEmpty() || !extra.isEmpty()) {
+                throw new GradleException("${languageFile.name} differs from en_us.json; missing: ${missing}, extra: ${extra}")
+            }
+        }
+    }
+}
+
+tasks.named('check') { dependsOn(tasks.named('checkLanguageKeys')) }

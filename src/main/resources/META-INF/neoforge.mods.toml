@@ -1,0 +1,22 @@
+modLoader="javafml"
+loaderVersion="[1,)"
+license="${mod_license}"
+[[mods]]
+modId="${mod_id}"
+version="${mod_version}"
+displayName="${mod_name}"
+authors="Draxer"
+credits="Basado en parte en DragonMine Z (GPL-3.0) de Yuseix300, ezShokkoh y Bruno. Ver NOTICE.md."
+description='''Razas, estadísticas, ki y transformaciones al estilo Dragon Ball para las versiones nuevas de Minecraft.'''
+[[dependencies.${mod_id}]]
+modId="neoforge"
+type="required"
+versionRange="[${neo_version},)"
+ordering="NONE"
+side="BOTH"
+[[dependencies.${mod_id}]]
+modId="minecraft"
+type="required"
+versionRange="${minecraft_version_range}"
+ordering="NONE"
+side="BOTH"
