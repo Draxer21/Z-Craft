@@ -52,7 +52,7 @@ public final class ZClient {
 
     /** The one place that opens screens (this call is what differs between Minecraft versions). */
     public static void open(Screen screen) {
-        Minecraft.getInstance().gui.setScreen(screen);
+        Minecraft.getInstance().setScreen(screen);
     }
 
     public static void send(Action action, int a, int b) {
