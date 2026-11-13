@@ -192,7 +192,7 @@ public final class ZServer {
         refresh(player);
         ServerLevel level = (ServerLevel) player.level();
         level.playSound(null, player.blockPosition(), SoundEvents.TOTEM_USE, SoundSource.PLAYERS, 0.7f, 1.4f);
-        level.sendParticles(ParticleTypes.FLASH, player.getX(), player.getY() + 1, player.getZ(), 1, 0, 0, 0, 0);
+        level.sendParticles(ParticleTypes.END_ROD, player.getX(), player.getY() + 1, player.getZ(), 30, 0.3, 0.6, 0.3, 0.15);
         aura(level, player, form.color(), 40);
         player.sendOverlayMessage(Component.translatable(form.key()));
     }
